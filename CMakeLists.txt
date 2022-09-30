@@ -11,9 +11,9 @@ if (DEFINED MCU)
   # Setting up the toolchain
   set(CMAKE_TOOLCHAIN_FILE "${mcu_support_SOURCE_DIR}/cmake/cortex.cmake")
 	# Project information
-	project(AinsteinUsd1
+	project(Thoneflow_3901u
 		VERSION 1.0.0
-		DESCRIPTION "Ainstein US-D1 sensor driver"
+		DESCRIPTION "ThoneFlow_3901U Driver"
 		LANGUAGES CXX
 	)
 	# Grab the processor and set up definitions and compile options
@@ -27,36 +27,18 @@ if (DEFINED MCU)
 	)
 	FetchContent_MakeAvailable(core)
 	# Add the library target
-	add_library(ainstein_usd1
-		src/ainstein_usd1.h
-		src/ainstein_usd1.cpp
+	add_library(thoneflow_3901u
+		src/thoneflow_3901u.h
+		src/thoneflow_3901u.cpp
 	)
 	# Link libraries
-	target_link_libraries(ainstein_usd1
+	target_link_libraries(thoneflow_3901u
 		PUBLIC
 			core
 	)
 	# Setup include directories 
-	target_include_directories(ainstein_usd1 PUBLIC 
+	target_include_directories(thoneflow_3901u PUBLIC 
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
 		$<INSTALL_INTERFACE:include>
 	)
-	# Example and test if this project is built separately
-	if (PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
-		# Add the spi example target
-		add_executable(usd1_example examples/cmake/usd1_example.cc)
-		# Add the includes
-		target_include_directories(usd1_example PUBLIC 
-			$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-			$<INSTALL_INTERFACE:include>
-		)
-		# Link libraries to the example target
-		target_link_libraries(usd1_example
-			PRIVATE 
-				ainstein_usd1
-		)
-		# Add hex and upload targets
-		include(${mcu_support_SOURCE_DIR}/cmake/flash_mcu.cmake)
-		FlashMcu(usd1_example ${MCU} ${mcu_support_SOURCE_DIR})
-	endif()
 endif()

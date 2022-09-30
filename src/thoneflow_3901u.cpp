@@ -1,8 +1,5 @@
 /*
-* Brian R Taylor
-* brian.taylor@bolderflight.com
-* 
-* Copyright (c) 2022 Bolder Flight Systems Inc
+* Tuan Luong
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the “Software”), to
